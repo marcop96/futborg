@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/attribute-hyphenation -->
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import DataTable from 'primevue/datatable'
@@ -20,15 +21,15 @@ onMounted(async () => {
 <template>
   <Suspense>
     <div v-if="matches">
-      <div v-for="match in matches" v-if="matches" :key="match.date">
-        <DataTable :value="matches" table-style="min-width: 50rem">
-          <Column field="date" header="Code">{{ matches. }}</Column>
-          <Column field="name" header="Name" />
-          <Column field="category" header="Category" />
-          <Column field="quantity" header="Quantity" />
-        </DataTable>
-      </div>
-      <div v-else>Loading...</div>
+      <DataTable :value="matches" show-grid-lines table-style=" min-width: 50rem" w-250 flex justify-center text-right>
+        <Column field="date" header="Date" />
+        <Column field="team1" header="Players team 1" />
+        <Column field="team2" header="Players team 2" />
+        <Column field="goals1" header="Goals team 1" />
+        <Column field="goals2" header="Goals team 2" />
+      </DataTable>
     </div>
+
+    <div v-else>Loading...</div>
   </Suspense>
 </template>
