@@ -4,7 +4,6 @@ import api from '@/api'
 import type { Match } from '@/types'
 
 const matches = ref<null | Match[]>(null)
-const players = await api.player()
 
 onMounted(async () => {
   try {
@@ -47,7 +46,8 @@ onMounted(async () => {
         </tbody>
       </table>
     </div>
-
     <div v-else>Loading...</div>
   </Suspense>
 </template>
+
+```
