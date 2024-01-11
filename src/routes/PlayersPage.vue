@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 import api from '@/api'
 
-const players = await api.player
+// const players = await api.player
 </script>
 
 <template>
-  <pre v-if="players">{{ players }}</pre>
+  <div class="text-green-4">PLAYERS PAGE</div>
 </template>
