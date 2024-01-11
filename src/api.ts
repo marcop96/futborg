@@ -27,6 +27,7 @@ const api = {
       const { team1, team2, goals1, goals2 } = match
       const team1Players = team1.split(',')
       const team2Players = team2.split(',')
+      const allPlayers = team1Players.concat(team2Players)
 
       team1Players.forEach((playerName) => {
         const player = players.get(playerName) || { name: playerName, matches: 0, score: 0 }
