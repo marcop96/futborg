@@ -1,3 +1,4 @@
+import { e } from 'vitest/dist/reporters-qc5Smpt5.js'
 import type { Match, Player } from '@/types'
 
 const api = {
@@ -25,27 +26,32 @@ const api = {
 
     matches.forEach((match) => {
       const { team1, team2, goals1, goals2 } = match
-      const team1Players = team1.split(',')
-      const team2Players = team2.split(',')
-      const allPlayers = team1Players.concat(team2Players)
+      const allPlayers = [...new Set([...team1.split(','), ...team2.split(',')])].map(playerName => playerName.trim())
 
-      team1Players.forEach((playerName) => {
+      allPlayers.forEach((playerName) => {
         const player = players.get(playerName) || { name: playerName, matches: 0, score: 0 }
         player.matches++
-        player.score += goals1 - goals2
-        players.set(playerName, player)
-      })
+        if (team1.includes(playerName)) {
+          if (goals1 > goals2)
+            player.score += 1
+          else if (goals1 < goals2)
+            player.score -= 1
+        }
+        if (team2.includes(playerName)) {
+          if (goals1 > goals2)
+            player.score -= 1
+          else if (goals1 < goals2)
+            player.score += 1
+        }
 
-      team2Players.forEach((playerName) => {
-        const player = players.get(playerName) || { name: playerName, matches: 0, score: 0 }
-        player.matches++
-        player.score += goals2 - goals1
         players.set(playerName, player)
       })
     })
 
     return Array.from(players.values())
-  },
+  }
+
+  ,
 }
 
 export default api
