@@ -1,4 +1,3 @@
-import { e } from 'vitest/dist/reporters-qc5Smpt5.js'
 import type { Match, Player } from '@/types'
 
 const api = {
@@ -26,6 +25,8 @@ const api = {
 
     matches.forEach((match) => {
       const { team1, team2, goals1, goals2 } = match
+
+      // por que qgarra todos los jugadores?
       const allPlayers = [...new Set([...team1.split(','), ...team2.split(',')])].map(playerName => playerName.trim())
 
       allPlayers.forEach((playerName) => {
@@ -34,12 +35,15 @@ const api = {
         if (team1.includes(playerName)) {
           if (goals1 > goals2)
             player.score += 1
+
           else if (goals1 < goals2)
             player.score -= 1
+          console.log((`${playerName} ${goals1} ${goals2} = ${player.score}`))
         }
-        if (team2.includes(playerName)) {
+        else if (team2.includes(playerName)) {
           if (goals1 > goals2)
             player.score -= 1
+
           else if (goals1 < goals2)
             player.score += 1
         }
